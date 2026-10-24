@@ -51,11 +51,11 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
                     aria-current={activo ? "page" : undefined}
                     className={`${BASE} ${
                       activo
-                        ? "bg-marron-bg font-medium text-fg shadow-[inset_2px_0_0_var(--marron)]"
-                        : "text-muted hover:bg-subtle hover:text-fg"
+                        ? "bg-marron-bg font-medium text-marron shadow-[inset_2px_0_0_var(--marron)]"
+                        : "text-fg/75 hover:bg-subtle hover:text-fg"
                     }`}
                   >
-                    <Icono className="size-[18px] shrink-0" aria-hidden="true" />
+                    <Icono className="size-5 shrink-0" aria-hidden="true" />
                     <span className={etiqueta}>{label}</span>
                   </Link>
                 </li>
@@ -68,10 +68,10 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
                 aria-pressed={chat.abierto}
                 title={expandido ? undefined : "Chat"}
                 className={`${BASE} ${
-                  chat.abierto ? "bg-subtle font-medium text-fg" : "text-muted hover:bg-subtle hover:text-fg"
+                  chat.abierto ? "bg-marron-bg font-medium text-marron" : "text-fg/75 hover:bg-subtle hover:text-fg"
                 }`}
               >
-                <MessageSquare className="size-[18px] shrink-0" aria-hidden="true" />
+                <MessageSquare className="size-5 shrink-0" aria-hidden="true" />
                 <span className={etiqueta}>Chat</span>
               </button>
             </li>
@@ -84,12 +84,12 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
             onClick={onAlternar}
             aria-expanded={expandido}
             title={expandido ? undefined : "Expandir menú"}
-            className={`${BASE} text-muted hover:bg-subtle hover:text-fg`}
+            className={`${BASE} text-fg/75 hover:bg-subtle hover:text-fg`}
           >
             {expandido ? (
-              <PanelLeftClose className="size-[18px] shrink-0" aria-hidden="true" />
+              <PanelLeftClose className="size-5 shrink-0" aria-hidden="true" />
             ) : (
-              <PanelLeftOpen className="size-[18px] shrink-0" aria-hidden="true" />
+              <PanelLeftOpen className="size-5 shrink-0" aria-hidden="true" />
             )}
             <span className={etiqueta}>{expandido ? "Contraer" : "Expandir menú"}</span>
           </button>

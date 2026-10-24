@@ -1,202 +1,227 @@
 "use client";
 
-import { useState } from "react";
-import { AlertTriangle, Check, CheckCircle2, CircleDashed } from "lucide-react";
+import { useMemo, useState } from "react";
 import { checklist, constructora } from "@/lib/datos";
-import { ETIQUETA_FICHA } from "@/lib/estados";
-import type { Indicador, ItemChecklist } from "@/lib/tipos";
+import type { ArchivoCargado, EstadoItem, RegistroItem } from "@/lib/tipos";
+import { Filtros, type FiltroEstado } from "./checklist/Filtros";
+import { Grupo } from "./checklist/Grupo";
+import { Ingreso } from "./checklist/Ingreso";
+import { ScoreEmpresa } from "./checklist/ScoreEmpresa";
+import { Semaforo, type NivelRiesgo } from "./checklist/Semaforo";
 
-const listos = constructora.indicadores.filter((i) => i.listo);
-const proximos = constructora.indicadores.filter((i) => !i.listo);
-const totalManual = checklist.reduce((n, g) => n + g.items.length, 0);
+const ITEMS = checklist.flatMap((g) => g.items);
+const ITEMS_POR_ID = new Map(ITEMS.map((i) => [i.id, i]));
+const CLAVES = ITEMS.filter((i) => i.clave);
+const ALERTAS_EMPRESA = constructora.indicadores.filter((i) => i.listo && i.estado === "alerta").length;
 
-function FilaIndicador({ indicador }: { indicador: Indicador }) {
-  const alerta = indicador.estado === "alerta";
-  const Icono = !indicador.listo ? CircleDashed : alerta ? AlertTriangle : CheckCircle2;
-  return (
-    <li className="flex gap-3 px-4 py-4 sm:px-5">
-      <Icono
-        className={`mt-0.5 size-[18px] shrink-0 ${
-          !indicador.listo ? "text-muted" : alerta ? "text-vencido" : "text-fg"
-        }`}
-        aria-hidden="true"
-      />
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
-          <h3 className={`text-sm font-medium ${indicador.listo ? "" : "text-muted"}`}>{indicador.agente}</h3>
-          <span
-            className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-              !indicador.listo
-                ? "border border-line text-muted"
-                : alerta
-                  ? "bg-vencido-bg text-vencido"
-                  : "bg-subtle text-fg"
-            }`}
-          >
-            {indicador.listo ? ETIQUETA_FICHA[indicador.estado] : "Próximamente"}
-          </span>
-        </div>
-        {indicador.listo && <p className="mt-1 text-sm">{indicador.dato}</p>}
-        <p className="mt-1 text-sm text-muted">{indicador.porque}</p>
-        {indicador.listo && <p className="mt-2 text-xs text-muted">Origen: {indicador.origen}</p>}
-      </div>
-    </li>
-  );
+function normalizar(texto: string) {
+  return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function FilaManual({
-  item,
-  marcado,
-  onCambiar,
-}: {
-  item: ItemChecklist;
-  marcado: boolean;
-  onCambiar: () => void;
-}) {
-  return (
-    <li>
-      <label className="flex cursor-pointer gap-3 px-4 py-4 hover:bg-subtle sm:px-5">
-        <input type="checkbox" checked={marcado} onChange={onCambiar} className="peer sr-only" />
-        <span
-          aria-hidden="true"
-          className={`mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded border transition-colors peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-fg ${
-            marcado ? "border-fg bg-fg text-bg" : "border-muted"
-          }`}
-        >
-          {marcado && <Check className="size-3" strokeWidth={3} />}
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="flex flex-wrap items-center gap-2">
-            <span className={`text-sm font-medium ${marcado ? "text-muted line-through" : ""}`}>
-              {item.titulo}
-            </span>
-            {item.clave && (
-              <span className="rounded-full border border-line px-2 py-0.5 text-[11px] font-medium text-muted">
-                Clave
-              </span>
-            )}
-          </span>
-          <span className="mt-1 block text-sm leading-relaxed text-muted">{item.detalle}</span>
-        </span>
-      </label>
-    </li>
-  );
+function adivinarItem(nombre: string) {
+  const n = normalizar(nombre);
+  return ITEMS.find((i) => i.palabras.some((p) => n.includes(normalizar(p))))?.id ?? null;
 }
 
 export function Checklist() {
-  const [marcados, setMarcados] = useState<Set<string>>(new Set());
-  const alertas = listos.filter((i) => i.estado === "alerta").length;
-  const clavesPendientes = checklist
-    .flatMap((g) => g.items)
-    .filter((i) => i.clave && !marcados.has(i.id)).length;
+  const [registros, setRegistros] = useState<Record<string, RegistroItem>>({});
+  const [archivos, setArchivos] = useState<ArchivoCargado[]>([]);
+  const [abiertos, setAbiertos] = useState<Set<string>>(new Set([checklist[0].id]));
+  const [filtro, setFiltro] = useState<FiltroEstado>("todos");
+  const [soloClaves, setSoloClaves] = useState(false);
+  const [busqueda, setBusqueda] = useState("");
 
-  function alternar(id: string) {
-    setMarcados((actual) => {
-      const siguiente = new Set(actual);
-      if (siguiente.has(id)) siguiente.delete(id);
-      else siguiente.add(id);
-      return siguiente;
+  const estadoDe = (id: string): EstadoItem => registros[id]?.estado ?? "pendiente";
+
+  function ingresar(itemId: string, archivo: string) {
+    setRegistros((r) => ({ ...r, [itemId]: { estado: "verificando", archivo } }));
+    const resultado: EstadoItem = ITEMS_POR_ID.get(itemId)?.observacion_demo ? "observado" : "verificado";
+    window.setTimeout(() => {
+      setRegistros((r) =>
+        r[itemId]?.archivo === archivo && r[itemId].estado === "verificando"
+          ? { ...r, [itemId]: { estado: resultado, archivo } }
+          : r,
+      );
+    }, 1800);
+  }
+
+  function liberar(itemId: string, archivo: string) {
+    setRegistros((r) => {
+      if (r[itemId]?.archivo !== archivo) return r;
+      const { [itemId]: _, ...resto } = r;
+      return resto;
     });
   }
 
-  const porcentaje = Math.round((marcados.size / totalManual) * 100);
+  function agregar(files: FileList, itemForzado?: string) {
+    const nuevos = Array.from(files).map<ArchivoCargado>((f) => ({
+      id: crypto.randomUUID(),
+      nombre: f.name,
+      peso: f.size,
+      itemId: itemForzado ?? adivinarItem(f.name),
+    }));
+    setArchivos((a) => [
+      ...a.map((x) => (itemForzado && x.itemId === itemForzado ? { ...x, itemId: null } : x)),
+      ...nuevos,
+    ]);
+    nuevos.forEach((n) => n.itemId && ingresar(n.itemId, n.nombre));
+  }
+
+  function asignar(archivoId: string, itemId: string | null) {
+    const archivo = archivos.find((a) => a.id === archivoId);
+    if (!archivo) return;
+    if (archivo.itemId) liberar(archivo.itemId, archivo.nombre);
+    setArchivos((a) =>
+      a.map((x) =>
+        x.id === archivoId ? { ...x, itemId } : itemId && x.itemId === itemId ? { ...x, itemId: null } : x,
+      ),
+    );
+    if (itemId) ingresar(itemId, archivo.nombre);
+  }
+
+  function quitar(archivoId: string) {
+    const archivo = archivos.find((a) => a.id === archivoId);
+    if (archivo?.itemId) liberar(archivo.itemId, archivo.nombre);
+    setArchivos((a) => a.filter((x) => x.id !== archivoId));
+  }
+
+  function alternarGrupo(id: string) {
+    setAbiertos((s) => {
+      const n = new Set(s);
+      if (n.has(id)) n.delete(id);
+      else n.add(id);
+      return n;
+    });
+  }
+
+  const conteos = useMemo(() => {
+    const c: Record<FiltroEstado, number> = {
+      todos: 0,
+      pendiente: 0,
+      verificando: 0,
+      verificado: 0,
+      observado: 0,
+    };
+    for (const i of ITEMS) {
+      if (soloClaves && !i.clave) continue;
+      c.todos++;
+      c[registros[i.id]?.estado ?? "pendiente"]++;
+    }
+    return c;
+  }, [registros, soloClaves]);
+
+  const verificados = ITEMS.filter((i) => estadoDe(i.id) === "verificado").length;
+  const observados = ITEMS.filter((i) => estadoDe(i.id) === "observado").length;
+  const clavesPendientes = CLAVES.filter((i) => estadoDe(i.id) !== "verificado").length;
+  const porcentaje = verificados / ITEMS.length;
+
+  const nivel: NivelRiesgo =
+    observados > 0 || clavesPendientes > CLAVES.length / 2
+      ? "alto"
+      : clavesPendientes === 0 && porcentaje >= 0.75
+        ? "bajo"
+        : "medio";
+
+  const motivos = [
+    clavesPendientes > 0 &&
+      `${clavesPendientes} punto${clavesPendientes > 1 ? "s" : ""} clave sin verificar`,
+    observados > 0 && `${observados} documento${observados > 1 ? "s" : ""} con observaciones`,
+    ALERTAS_EMPRESA > 0 && `${ALERTAS_EMPRESA} alerta en el historial de la constructora`,
+  ].filter((m): m is string => Boolean(m));
+
+  const termino = normalizar(busqueda.trim());
+  const filtroActivo = filtro !== "todos" || soloClaves || termino.length > 0;
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-8">
       <header className="flex max-w-2xl flex-col gap-2">
-        <p className="text-sm text-muted">Antes de invertir</p>
-        <h1 className="text-balance text-3xl font-semibold tracking-tight">Checklist del inversor</h1>
+        <p className="text-sm font-medium text-marron">Antes de invertir</p>
+        <h1 className="text-balance text-3xl tracking-tight">Verificá antes de firmar</h1>
         <p className="text-pretty leading-relaxed text-muted">
-          Lo que conviene saber de {constructora.nombre} antes de firmar. Una parte la revisamos
-          nosotros con fuentes públicas; la otra la tenés que pedir vos.
+          Cargá los documentos que te entregó la constructora. Cada punto pasa por ingreso y
+          verificación, y el semáforo se actualiza según lo que esté cumplido.
         </p>
       </header>
 
-      <dl className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-3">
-        <div className="flex flex-col gap-1 bg-surface p-4 sm:p-5">
-          <dt className="text-xs text-muted">Tu revisión</dt>
-          <dd className="text-xl font-semibold tracking-tight tabular-nums">
-            {marcados.size} de {totalManual}
-          </dd>
-          <dd className="mt-2 h-1 overflow-hidden rounded-full bg-line" aria-hidden="true">
-            <div className="h-full bg-fg transition-[width]" style={{ width: `${porcentaje}%` }} />
-          </dd>
-        </div>
-        <div className="flex flex-col gap-1 bg-surface p-4 sm:p-5">
-          <dt className="text-xs text-muted">Puntos clave sin revisar</dt>
-          <dd
-            className={`text-xl font-semibold tracking-tight tabular-nums ${
-              clavesPendientes > 0 ? "text-atraso" : ""
-            }`}
-          >
-            {clavesPendientes}
-          </dd>
-          <dd className="text-xs text-muted">No firmes sin estos</dd>
-        </div>
-        <div className="flex flex-col gap-1 bg-surface p-4 sm:p-5">
-          <dt className="text-xs text-muted">Alertas de la constructora</dt>
-          <dd
-            className={`text-xl font-semibold tracking-tight tabular-nums ${alertas > 0 ? "text-vencido" : ""}`}
-          >
-            {alertas}
-          </dd>
-          <dd className="text-xs text-muted">
-            {listos.length} de {constructora.indicadores.length} verificaciones disponibles
-          </dd>
-        </div>
-      </dl>
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="flex min-w-0 flex-col gap-8">
+          <Ingreso
+            archivos={archivos}
+            registros={registros}
+            onAgregar={(f) => agregar(f)}
+            onAsignar={asignar}
+            onQuitar={quitar}
+          />
 
-      <div className="grid items-start gap-10 xl:grid-cols-2">
-        <section className="flex flex-col gap-4" aria-labelledby="t-auto">
-          <div>
-            <h2 id="t-auto" className="text-base font-semibold">
-              Lo que revisamos nosotros
-            </h2>
-            <p className="text-sm text-muted">Cada dato indica de dónde sale.</p>
-          </div>
-          <ul className="divide-y divide-line overflow-hidden rounded-xl border border-line bg-surface">
-            {[...listos, ...proximos].map((indicador) => (
-              <FilaIndicador key={indicador.id} indicador={indicador} />
-            ))}
-          </ul>
-        </section>
+          <section aria-labelledby="t-puntos" className="flex flex-col gap-4">
+            <div>
+              <h2 id="t-puntos" className="text-base">
+                2. Lo que se te pide
+              </h2>
+              <p className="text-sm text-muted">Abrí cada sección para ver qué falta.</p>
+            </div>
+            <Filtros
+              estado={filtro}
+              onEstado={setFiltro}
+              soloClaves={soloClaves}
+              onSoloClaves={setSoloClaves}
+              busqueda={busqueda}
+              onBusqueda={setBusqueda}
+              conteos={conteos}
+            />
+            <div className="flex flex-col gap-3">
+              {checklist.map((grupo) => {
+                const visibles = grupo.items.filter(
+                  (i) =>
+                    (filtro === "todos" || estadoDe(i.id) === filtro) &&
+                    (!soloClaves || i.clave) &&
+                    (!termino ||
+                      normalizar(`${i.titulo} ${i.detalle} ${i.documento}`).includes(termino)),
+                );
+                if (filtroActivo && visibles.length === 0) return null;
+                return (
+                  <Grupo
+                    key={grupo.id}
+                    grupo={grupo}
+                    items={visibles}
+                    registros={registros}
+                    abierto={filtroActivo || abiertos.has(grupo.id)}
+                    onAlternar={() => alternarGrupo(grupo.id)}
+                    onSubir={(itemId, file) => {
+                      const lista = new DataTransfer();
+                      lista.items.add(file);
+                      agregar(lista.files, itemId);
+                    }}
+                  />
+                );
+              })}
+              {filtroActivo &&
+                !checklist.some((g) =>
+                  g.items.some(
+                    (i) =>
+                      (filtro === "todos" || estadoDe(i.id) === filtro) &&
+                      (!soloClaves || i.clave) &&
+                      (!termino ||
+                        normalizar(`${i.titulo} ${i.detalle} ${i.documento}`).includes(termino)),
+                  ),
+                ) && (
+                  <p className="rounded-xl border border-dashed border-line px-5 py-8 text-center text-sm text-muted">
+                    Ningún punto coincide con los filtros.
+                  </p>
+                )}
+            </div>
+          </section>
+        </div>
 
-        <section className="flex flex-col gap-4" aria-labelledby="t-manual">
-          <div>
-            <h2 id="t-manual" className="text-base font-semibold">
-              Lo que tenés que pedir vos
-            </h2>
-            <p className="text-sm text-muted">Marcá cada punto a medida que lo confirmás.</p>
-          </div>
-          {checklist.map((grupo) => {
-            const hechos = grupo.items.filter((i) => marcados.has(i.id)).length;
-            return (
-              <div key={grupo.id} className="overflow-hidden rounded-xl border border-line bg-surface">
-                <div className="flex items-center justify-between border-b border-line px-4 py-3 sm:px-5">
-                  <h3 className="text-sm font-semibold">{grupo.titulo}</h3>
-                  <span className="text-xs text-muted tabular-nums">
-                    {hechos}/{grupo.items.length}
-                  </span>
-                </div>
-                <ul className="divide-y divide-line">
-                  {grupo.items.map((item) => (
-                    <FilaManual
-                      key={item.id}
-                      item={item}
-                      marcado={marcados.has(item.id)}
-                      onCambiar={() => alternar(item.id)}
-                    />
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
-        </section>
+        <aside className="flex flex-col gap-4 lg:sticky lg:top-20" aria-label="Resumen de riesgo">
+          <Semaforo nivel={nivel} verificados={verificados} total={ITEMS.length} motivos={motivos} />
+          <ScoreEmpresa />
+        </aside>
       </div>
 
       <p className="max-w-2xl text-xs leading-relaxed text-muted">
-        Ninguna verificación garantiza que una inversión sea segura. Esta lista te ayuda a hacer las
-        preguntas correctas; consultá con un abogado o escribano antes de firmar.
+        La verificación es una demostración: los documentos no se envían ni se guardan. Ninguna
+        verificación garantiza que una inversión sea segura; consultá con un abogado o escribano.
       </p>
     </div>
   );

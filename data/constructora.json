@@ -1,5 +1,31 @@
 {
   "nombre": "Constructora Demo S.A. (ficticia)",
+  "score": 68,
+  "puntaje_promedio": 3.6,
+  "cantidad_opiniones": 42,
+  "opiniones": [
+    {
+      "autor": "Mariana G.",
+      "rol": "Compradora · Torre Norte",
+      "fecha": "ago 2026",
+      "puntaje": 4,
+      "texto": "La entrega se demoró cuatro meses, pero avisaron con tiempo y la calidad de terminaciones fue buena."
+    },
+    {
+      "autor": "Javier R.",
+      "rol": "Inversor · Edificio Parque",
+      "fecha": "may 2026",
+      "puntaje": 3,
+      "texto": "Cumplieron con la escritura. Costó obtener respuestas sobre el ajuste de cuotas."
+    },
+    {
+      "autor": "Lucía P.",
+      "rol": "Compradora · Torre Norte",
+      "fecha": "feb 2026",
+      "puntaje": 2,
+      "texto": "Hubo meses sin novedades de obra. Recomiendo pedir el cronograma firmado."
+    }
+  ],
   "indicadores": [
     {
       "id": "obras",
