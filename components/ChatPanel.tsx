@@ -5,6 +5,7 @@ import { ArrowUp, MessageSquare, X } from "lucide-react";
 import { fechaCorta } from "@/lib/fechas";
 import { fechasCitadas, PREGUNTAS } from "@/lib/preguntas";
 import { FotoObra } from "./FotoObra";
+import { MensajeMarkdown } from "./MensajeMarkdown";
 import { useChat, useFotos } from "./Shell";
 
 type Mensaje = {
@@ -131,7 +132,7 @@ export function ChatPanel() {
                       </p>
                     ) : (
                       <div className="flex flex-col gap-3">
-                        <p className="text-sm leading-relaxed whitespace-pre-wrap">{mensaje.texto}</p>
+                        <MensajeMarkdown texto={mensaje.texto} />
                         <ul className="flex flex-wrap gap-2">
                           {fechasCitadas(mensaje.texto).map((cita) => {
                             const foto = fotos.find((item) => item.fecha === cita);

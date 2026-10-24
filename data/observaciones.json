@@ -65,56 +65,5 @@
     "descripcion": "La obra pasó a estructura, con una losa completa sobre planta baja. Se están preparando las columnas del nivel siguiente.",
     "confianza": "media",
     "limitaciones": ""
-  },
-  {
-    "fecha": "2026-06-24",
-    "foto": "/obra/2026-06-24.jpeg",
-    "etapa": "estructura",
-    "pisos_con_estructura_visibles": 2,
-    "elementos_visibles": [
-      "segunda losa hormigonada",
-      "mampostería de ladrillo en planta baja y primer piso",
-      "encofrado y puntales",
-      "armaduras en espera de columnas del nivel siguiente"
-    ],
-    "hay_actividad_visible": true,
-    "cambios_vs_foto_anterior": "Se hormigonaron las columnas del primer piso y la segunda losa. Arrancó la mampostería en planta baja y primer piso. Quedan armaduras en espera para el nivel siguiente. El resto del terreno sigue sin estructura.",
-    "descripcion": "La estructura avanzó a dos losas completas, con mampostería iniciada en los niveles inferiores. Se prepara el nivel siguiente.",
-    "confianza": "media",
-    "limitaciones": ""
-  },
-  {
-    "fecha": "2026-10-01",
-    "foto": "/obra/2026-10-01.jpeg",
-    "etapa": "estructura",
-    "pisos_con_estructura_visibles": 2,
-    "elementos_visibles": [
-      "segunda losa hormigonada",
-      "mampostería de ladrillo en planta baja y primer piso",
-      "armaduras en espera de columnas del nivel siguiente",
-      "andamios y puntales"
-    ],
-    "hay_actividad_visible": true,
-    "cambios_vs_foto_anterior": "Sin avance visible. Siguen dos losas completas, la mampostería en los mismos niveles y las armaduras en espera. El resto del terreno sigue sin estructura.",
-    "descripcion": "La obra sigue en estructura con dos losas completas y mampostería en los niveles inferiores. No se ve avance respecto de la observación anterior.",
-    "confianza": "media",
-    "limitaciones": "La foto tiene sello 22/12/2024 y la fecha informada es 2026-10-01. No coinciden. La imagen podría ser anterior y no reflejar el estado actual."
-  },
-  {
-    "fecha": "2026-11-10",
-    "foto": "/obra/2026-11-10.jpeg",
-    "etapa": "terminaciones",
-    "pisos_con_estructura_visibles": 4,
-    "elementos_visibles": [
-      "fachada terminada con revoque y pintura",
-      "carpinterías y vidrios colocados",
-      "barandas de balcones y terraza",
-      "vereda y accesos terminados"
-    ],
-    "hay_actividad_visible": false,
-    "cambios_vs_foto_anterior": "Gran avance. Antes había dos losas y mampostería en niveles bajos. Ahora la estructura está completa, con planta baja, tres pisos y terraza, y la fachada está terminada.",
-    "descripcion": "Edificio con estructura completa y terminaciones exteriores concluidas. Parece terminado o en etapa final.",
-    "confianza": "media",
-    "limitaciones": "El sello dice 24/10/2026 y la fecha informada es 2026-11-10. No coinciden. Además, el salto respecto de la foto anterior es muy grande y conviene verificar que sea la misma obra. No se ven los interiores."
   }
 ]

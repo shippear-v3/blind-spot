@@ -1,7 +1,7 @@
 export const PREGUNTAS = [
   "¿Cómo viene la obra?",
   "¿Estamos atrasados respecto del boleto?",
-  "¿Qué cambió desde julio?",
+  "¿Qué cambió desde febrero?",
   "¿Quién es la constructora?",
 ];
 
