@@ -22,11 +22,11 @@ export function estadoTarea(tarea: Tarea, hoy: string): EstadoTarea {
 }
 
 export const ESTADO_TAREA: Record<EstadoTarea, { etiqueta: string; texto: string; punto: string; anillo: string }> = {
-  terminada: { etiqueta: "Terminada", texto: "text-ok", punto: "bg-ok", anillo: "" },
-  en_curso: { etiqueta: "En curso", texto: "text-pizarra", punto: "bg-pizarra", anillo: "" },
-  demorada: { etiqueta: "Demorada", texto: "text-atraso", punto: "bg-atraso", anillo: "ring-2 ring-atraso" },
-  vencida: { etiqueta: "Vencida", texto: "text-vencido", punto: "bg-vencido", anillo: "ring-2 ring-vencido" },
-  pendiente: { etiqueta: "Pendiente", texto: "text-muted", punto: "bg-line", anillo: "" },
+  terminada: { etiqueta: "Lista", texto: "text-ok", punto: "bg-ok", anillo: "" },
+  en_curso: { etiqueta: "En marcha", texto: "text-marron", punto: "bg-marron", anillo: "" },
+  demorada: { etiqueta: "Atrasada", texto: "text-atraso", punto: "bg-atraso", anillo: "ring-2 ring-atraso" },
+  vencida: { etiqueta: "Fuera de plazo", texto: "text-vencido", punto: "bg-vencido", anillo: "ring-2 ring-vencido" },
+  pendiente: { etiqueta: "Por empezar", texto: "text-muted", punto: "bg-line", anillo: "" },
 };
 
 export function sumarDias(iso: string, dias: number) {

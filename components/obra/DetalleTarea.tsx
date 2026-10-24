@@ -48,7 +48,7 @@ export function DetalleTarea({
   return (
     <aside
       aria-label="Detalle de la tarea"
-      className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface lg:sticky lg:top-20"
+      className="flex flex-col overflow-hidden rounded-xl border border-line bg-surface"
     >
       <div className="flex items-start justify-between gap-2 px-5 py-4">
         <div className="min-w-0">
@@ -83,6 +83,7 @@ export function DetalleTarea({
         </div>
       </div>
 
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 [&>div]:border-line sm:[&>div]:border-l sm:[&>div:nth-child(odd)]:border-l-0 xl:[&>div:nth-child(odd)]:border-l xl:[&>div:first-child]:border-l-0">
       <Bloque titulo="Avance">
         <div className="flex flex-col gap-3">
           <Barra etiqueta="Real" valor={tarea.avance} tono="bg-pizarra" />
@@ -137,6 +138,7 @@ export function DetalleTarea({
           </p>
         )}
       </Bloque>
+      </div>
     </aside>
   );
 }

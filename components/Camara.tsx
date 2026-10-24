@@ -165,7 +165,7 @@ export function Camara({
       </div>
 
       {vista === "cronograma" && tarea ? (
-        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_22rem]">
+        <div className="flex min-w-0 flex-col gap-4">
           <Gantt tareas={cronograma} hoy={proyecto.fecha_demo} seleccion={tarea.id} onElegir={setTareaId} />
           <DetalleTarea
             tareas={cronograma}
