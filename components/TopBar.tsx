@@ -1,0 +1,37 @@
+"use client";
+
+import { MessageSquare } from "lucide-react";
+import { proyecto } from "@/lib/datos";
+import { fechaLarga } from "@/lib/fechas";
+import { useChat } from "./Shell";
+
+export function TopBar() {
+  const chat = useChat();
+
+  return (
+    <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-line bg-bg/85 px-4 backdrop-blur sm:px-8">
+      <p className="min-w-0 truncate text-sm">
+        <span className="font-medium">{proyecto.obra}</span>
+        <span className="text-muted"> / {proyecto.unidad.split(",")[0]}</span>
+      </p>
+      <div className="flex shrink-0 items-center gap-3">
+        <p className="hidden text-xs text-muted tabular-nums sm:block">
+          Al {fechaLarga(proyecto.fecha_demo)}
+        </p>
+        <button
+          type="button"
+          onClick={chat.alternar}
+          aria-pressed={chat.abierto}
+          className={`inline-flex h-9 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition-colors ${
+            chat.abierto
+              ? "border border-marron bg-marron-bg text-marron"
+              : "bg-marron text-white hover:opacity-90"
+          }`}
+        >
+          <MessageSquare className="size-4" strokeWidth={2.25} aria-hidden="true" />
+          Chat
+        </button>
+      </div>
+    </header>
+  );
+}

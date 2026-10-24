@@ -64,15 +64,69 @@ export type Indicador = {
   id: string;
   agente: string;
   dato: string;
+  porque: string;
   origen: string;
   estado: EstadoIndicador;
   listo: boolean;
 };
 
+export type Opinion = {
+  autor: string;
+  rol: string;
+  fecha: string;
+  puntaje: number;
+  texto: string;
+};
+
 export type Constructora = {
   nombre: string;
+  score: number;
+  puntaje_promedio: number;
+  cantidad_opiniones: number;
+  opiniones: Opinion[];
   indicadores: Indicador[];
 };
+
+export type ItemChecklist = {
+  id: string;
+  titulo: string;
+  detalle: string;
+  clave: boolean;
+  documento: string;
+  palabras: string[];
+  observacion_demo?: string;
+};
+
+export type GrupoChecklist = {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  items: ItemChecklist[];
+};
+
+export type EstadoItem = "pendiente" | "verificando" | "verificado" | "observado";
+
+export type RegistroItem = { estado: EstadoItem; archivo?: string };
+
+export type ArchivoCargado = {
+  id: string;
+  nombre: string;
+  peso: number;
+  itemId: string | null;
+};
+
+export type Tarea = {
+  id: string;
+  nombre: string;
+  inicio: string;
+  fin: string;
+  avance: number;
+  responsable: string;
+  personas: number;
+  nota?: string;
+};
+
+export type EstadoTarea = "terminada" | "en_curso" | "demorada" | "vencida" | "pendiente";
 
 export type Alerta =
   | { tipo: "vencido"; nombre: string; fecha: string }

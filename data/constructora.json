@@ -1,11 +1,38 @@
 {
   "nombre": "Constructora Demo S.A. (ficticia)",
+  "score": 68,
+  "puntaje_promedio": 3.6,
+  "cantidad_opiniones": 42,
+  "opiniones": [
+    {
+      "autor": "Mariana G.",
+      "rol": "Compradora · Torre Norte",
+      "fecha": "ago 2026",
+      "puntaje": 4,
+      "texto": "La entrega se demoró cuatro meses, pero avisaron con tiempo y la calidad de terminaciones fue buena."
+    },
+    {
+      "autor": "Javier R.",
+      "rol": "Inversor · Edificio Parque",
+      "fecha": "may 2026",
+      "puntaje": 3,
+      "texto": "Cumplieron con la escritura. Costó obtener respuestas sobre el ajuste de cuotas."
+    },
+    {
+      "autor": "Lucía P.",
+      "rol": "Compradora · Torre Norte",
+      "fecha": "feb 2026",
+      "puntaje": 2,
+      "texto": "Hubo meses sin novedades de obra. Recomiendo pedir el cronograma firmado."
+    }
+  ],
   "indicadores": [
     {
       "id": "obras",
       "agente": "Historial de obras",
       "dato": "Obras entregadas: 8 de 10",
-      "origen": "declarado por la empresa",
+      "porque": "Una constructora con obras terminadas deja un historial que se puede revisar y visitar.",
+      "origen": "Declarado por la empresa",
       "estado": "sin_alertas",
       "listo": true
     },
@@ -13,7 +40,8 @@
       "id": "plazos",
       "agente": "Plazos de entrega",
       "dato": "Demora promedio: 5 meses sobre lo prometido",
-      "origen": "reportado por compradores",
+      "porque": "La demora en obras pasadas es el mejor indicio de la demora en esta.",
+      "origen": "Reportado por compradores",
       "estado": "alerta",
       "listo": true
     },
@@ -21,7 +49,8 @@
       "id": "bcra",
       "agente": "Situación crediticia",
       "dato": "Situación crediticia BCRA: 1 (normal)",
-      "origen": "fuente pública (BCRA)",
+      "porque": "Deudas impagas con bancos pueden frenar el ritmo de una obra.",
+      "origen": "Fuente pública (BCRA)",
       "estado": "sin_alertas",
       "listo": true
     },
@@ -29,7 +58,8 @@
       "id": "portales",
       "agente": "Unidades en portales",
       "dato": "Unidades en venta con la misma dirección",
-      "origen": "próximamente",
+      "porque": "La misma unidad publicada varias veces puede indicar una doble venta.",
+      "origen": "Próximamente",
       "estado": "no_determinable",
       "listo": false
     },
@@ -37,7 +67,8 @@
       "id": "normativa",
       "agente": "Conflictos con normativa",
       "dato": "Cruces con expedientes municipales",
-      "origen": "próximamente",
+      "porque": "Un expediente abierto o una clausura pueden paralizar la obra.",
+      "origen": "Próximamente",
       "estado": "no_determinable",
       "listo": false
     },
@@ -45,7 +76,8 @@
       "id": "redes",
       "agente": "Redes y registros",
       "dato": "Publicaciones y registros de la constructora",
-      "origen": "próximamente",
+      "porque": "Reclamos públicos de otros compradores anticipan problemas.",
+      "origen": "Próximamente",
       "estado": "no_determinable",
       "listo": false
     },
@@ -53,7 +85,8 @@
       "id": "zonas",
       "agente": "Zona de construcción",
       "dato": "Obras activas en la misma zona",
-      "origen": "próximamente",
+      "porque": "Muchas obras cerca compiten por mano de obra, materiales y compradores.",
+      "origen": "Próximamente",
       "estado": "no_determinable",
       "listo": false
     }

@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Fichas } from "@/components/Fichas";
-import { Shell } from "@/components/Shell";
+import { Checklist } from "@/components/Checklist";
 
 export const metadata: Metadata = {
   title: "Antes de invertir",
 };
 
 export default function Page() {
-  return (
-    <Shell>
-      <Fichas />
-    </Shell>
-  );
+  return <Checklist />;
 }
