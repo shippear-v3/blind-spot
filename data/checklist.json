@@ -1,0 +1,112 @@
+[
+  {
+    "id": "terreno",
+    "titulo": "Terreno y permisos",
+    "descripcion": "Que el terreno exista, sea de quien dice y se pueda construir.",
+    "items": [
+      {
+        "id": "dominio",
+        "titulo": "Titularidad del terreno",
+        "detalle": "El terreno tiene que estar a nombre de la constructora o del fideicomiso, sin embargos ni hipotecas.",
+        "clave": true,
+        "documento": "Informe de dominio",
+        "palabras": ["dominio", "titulo", "registro"]
+      },
+      {
+        "id": "permiso",
+        "titulo": "Permiso de edificación aprobado",
+        "detalle": "El permiso municipal debe existir y corresponder a esta dirección.",
+        "clave": true,
+        "documento": "Permiso de obra",
+        "palabras": ["permiso", "municipal", "habilitacion"]
+      },
+      {
+        "id": "planos",
+        "titulo": "Planos municipales",
+        "detalle": "Tu unidad (metros, piso, orientación) debe figurar igual que en el folleto.",
+        "clave": false,
+        "documento": "Planos aprobados",
+        "palabras": ["plano", "planos"]
+      }
+    ]
+  },
+  {
+    "id": "boleto",
+    "titulo": "Boleto de compraventa",
+    "descripcion": "Lo que te protege si la obra se atrasa o se cae.",
+    "items": [
+      {
+        "id": "entrega",
+        "titulo": "Fecha de entrega y multa por demora",
+        "detalle": "Fecha de posesión concreta y una penalidad por cada mes de atraso.",
+        "clave": true,
+        "documento": "Boleto de compraventa",
+        "palabras": ["boleto", "compraventa", "contrato"]
+      },
+      {
+        "id": "cronograma",
+        "titulo": "Cronograma de obra anexo",
+        "detalle": "Los hitos de obra deben formar parte del boleto. Es lo que comparamos con las fotos.",
+        "clave": false,
+        "documento": "Anexo de cronograma",
+        "palabras": ["cronograma", "anexo", "hitos"]
+      },
+      {
+        "id": "ajuste",
+        "titulo": "Ajuste de cuotas",
+        "detalle": "Qué índice se usa (CAC, dólar, fijo), con qué frecuencia y si hay un tope.",
+        "clave": false,
+        "documento": "Cláusula de ajuste",
+        "palabras": ["ajuste", "cuotas", "cac"],
+        "observacion_demo": "La cláusula no fija un tope al ajuste por CAC. Pedí que se incluya antes de firmar."
+      },
+      {
+        "id": "rescision",
+        "titulo": "Condiciones de rescisión",
+        "detalle": "Qué se devuelve y en qué plazo si alguna de las partes corta el contrato.",
+        "clave": false,
+        "documento": "Cláusula de rescisión",
+        "palabras": ["rescision", "rescisión"]
+      }
+    ]
+  },
+  {
+    "id": "pagos",
+    "titulo": "Estructura y pagos",
+    "descripcion": "Quién recibe tu dinero y qué respaldo tenés.",
+    "items": [
+      {
+        "id": "fideicomiso",
+        "titulo": "Fideicomiso o venta directa",
+        "detalle": "Si es fideicomiso, quién es el fiduciario y qué rol tenés vos.",
+        "clave": false,
+        "documento": "Contrato de fideicomiso",
+        "palabras": ["fideicomiso", "fiduciario"]
+      },
+      {
+        "id": "garantia",
+        "titulo": "Seguro o garantía",
+        "detalle": "Seguro de caución u otra garantía que te cubra si la obra se frena.",
+        "clave": false,
+        "documento": "Póliza de caución",
+        "palabras": ["poliza", "póliza", "seguro", "caucion", "garantia"]
+      },
+      {
+        "id": "escribano",
+        "titulo": "Escribano independiente",
+        "detalle": "La firma ante un escribano elegido por vos, no sólo el de la constructora.",
+        "clave": true,
+        "documento": "Datos del escribano",
+        "palabras": ["escribano", "escribania", "notario"]
+      },
+      {
+        "id": "recibos",
+        "titulo": "Recibo por cada pago",
+        "detalle": "Recibo o factura a tu nombre, con referencia a la unidad.",
+        "clave": false,
+        "documento": "Recibos de pago",
+        "palabras": ["recibo", "factura", "pago"]
+      }
+    ]
+  }
+]

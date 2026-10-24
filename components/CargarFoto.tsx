@@ -43,63 +43,63 @@ export function CargarFoto() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="font-mono text-xs tracking-[0.16em] text-pendiente">CONSTRUCTORA</p>
-        <h2 className="font-display text-4xl font-bold uppercase leading-none">Cargar foto de obra</h2>
-        <p className="mt-3 max-w-2xl text-lg leading-snug">
-          La foto entra por acá. El inversor no la sube: la ve en la cámara y se la pregunta al agente.
+        <p className="text-sm text-muted">Constructora</p>
+        <h1 className="text-3xl font-semibold tracking-tight">Cargar foto de obra</h1>
+        <p className="mt-2 max-w-2xl text-sm text-muted">
+          La foto entra por acá. El inversor la ve en la cámara y se la pregunta al agente.
         </p>
       </div>
       <form
-        className="flex max-w-xl flex-col gap-4 bg-card p-4"
+        className="flex max-w-xl flex-col gap-4 rounded-xl border border-line bg-surface p-4"
         onSubmit={(event) => {
           event.preventDefault();
           enviar();
         }}
       >
         <div className="flex flex-col gap-1">
-          <label htmlFor="fecha-foto" className="font-mono text-xs tracking-[0.14em] text-pendiente">
-            FECHA DE LA FOTO
+          <label htmlFor="fecha-foto" className="text-xs text-muted">
+            Fecha de la foto
           </label>
           <input
             id="fecha-foto"
             type="date"
             value={fecha}
             onChange={(event) => setFecha(event.target.value)}
-            className="min-h-11 border border-line bg-galvanized px-3"
+            className="h-10 rounded-md border border-line bg-bg px-3 text-sm"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label htmlFor="archivo-foto" className="font-mono text-xs tracking-[0.14em] text-pendiente">
-            ARCHIVO
+          <label htmlFor="archivo-foto" className="text-xs text-muted">
+            Archivo
           </label>
           <input
             id="archivo-foto"
             type="file"
             accept="image/*"
             onChange={(event) => setArchivo(event.target.files?.[0] ?? null)}
-            className="min-h-11 text-sm"
+            className="text-sm"
           />
         </div>
         <button
           type="submit"
           disabled={!archivo || pendiente}
-          className="min-h-11 bg-soil px-4 text-sm font-semibold text-card disabled:opacity-60"
+          className="h-10 rounded-md bg-marron px-4 text-sm font-semibold text-white disabled:opacity-60"
         >
           {pendiente ? "Mirando la foto…" : "Analizar y guardar"}
         </button>
         {error && <p className="text-sm text-vencido">{error}</p>}
       </form>
       {guardada && (
-        <section className="max-w-xl bg-card p-4">
-          <p className="font-mono text-xs tracking-[0.16em] text-cumplido">GUARDADA</p>
-          <div className="mt-3 aspect-[16/10] overflow-hidden bg-soil">
+        <section className="max-w-xl rounded-xl border border-line bg-surface p-4">
+          <p className="text-xs font-medium text-ok">Guardada</p>
+          <div className="mt-3 aspect-[16/10] overflow-hidden rounded-lg bg-black grayscale">
             <FotoObra obs={guardada} />
           </div>
-          <p className="mt-3 text-lg leading-snug">{guardada.descripcion}</p>
-          <p className="mt-2 font-mono text-xs text-pendiente">
+          <p className="mt-3 text-sm leading-relaxed">{guardada.descripcion}</p>
+          <p className="mt-2 text-xs text-muted">
             {guardada.etapa} · {guardada.fecha}
           </p>
-          <Link href="/" className="mt-4 inline-block text-sm underline">
+          <Link href="/" className="mt-4 inline-block text-sm font-medium underline underline-offset-4">
             Ver como inversor
           </Link>
         </section>

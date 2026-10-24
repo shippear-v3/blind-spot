@@ -1,48 +1,57 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Big_Shoulders_Stencil, IBM_Plex_Mono, Source_Sans_3 } from "next/font/google";
+import { Suspense } from "react";
+import { Arimo, Inter } from "next/font/google";
+import { connection } from "next/server";
+import { Shell } from "@/components/Shell";
+import { listarObservaciones } from "@/lib/store";
 import "./globals.css";
 
-const display = Big_Shoulders_Stencil({
+const inter = Inter({
   subsets: ["latin", "latin-ext"],
-  weight: ["700", "800"],
-  variable: "--font-display-face",
+  variable: "--font-inter",
 });
 
-const body = Source_Sans_3({
+const arimo = Arimo({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "600", "700"],
-  variable: "--font-body-face",
-});
-
-const mono = IBM_Plex_Mono({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-  variable: "--font-mono-face",
+  weight: ["700"],
+  variable: "--font-arimo",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Cómo viene mi obra",
-    template: "%s · Edificio Ejemplo",
+    default: "Blind Spot · Cómo viene mi obra",
+    template: "%s · Blind Spot",
   },
   description: "Seguimiento de una inversión en pozo. Los datos de esta demo son ficticios.",
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0c0c" },
+  ],
+};
+
+async function Marco({ children }: { children: ReactNode }) {
+  await connection();
+  const fotos = await listarObservaciones();
+  return <Shell fotos={fotos}>{children}</Shell>;
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="es"
-      className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
-    >
-      <body className="flex min-h-full flex-col bg-galvanized font-sans text-ink">
+    <html lang="es" className={`${inter.variable} ${arimo.variable} h-full antialiased`}>
+      <body className="min-h-full bg-bg font-sans text-fg">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-sodium focus:px-3 focus:py-2 focus:text-soil"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-fg focus:px-3 focus:py-2 focus:text-bg"
         >
           Saltar al contenido
         </a>
-        {children}
+        <Suspense fallback={<p className="px-8 py-8 text-sm text-muted">Cargando la obra…</p>}>
+          <Marco>{children}</Marco>
+        </Suspense>
       </body>
     </html>
   );
