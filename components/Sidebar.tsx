@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Building2, ListChecks, MessageSquare, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Building2, ListChecks, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { MarcaLogo, Logotipo } from "./Logo";
-import { useChat } from "./Shell";
 
 const LINKS: { href: string; label: string; icono: LucideIcon }[] = [
   { href: "/", label: "Obra", icono: Building2 },
@@ -17,7 +16,6 @@ const BASE =
 
 export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlternar: () => void }) {
   const pathname = usePathname();
-  const chat = useChat();
   const etiqueta = expandido ? "truncate" : "sr-only";
 
   return (
@@ -34,9 +32,18 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
           expandido ? "w-56" : "w-14"
         }`}
       >
-        <div className="flex h-14 shrink-0 items-center gap-3 border-b border-line px-3">
-          <MarcaLogo className="size-8 shrink-0" />
-          {expandido ? <Logotipo className="truncate" /> : <span className="sr-only">Blind Spot</span>}
+        <div className="flex h-14 shrink-0 items-center border-b border-line px-2">
+          <button
+            type="button"
+            onClick={onAlternar}
+            aria-expanded={expandido}
+            aria-label={expandido ? "Blind Spot, contraer menú" : "Blind Spot, expandir menú"}
+            title={expandido ? "Contraer menú" : "Expandir menú"}
+            className="flex h-10 w-full min-w-0 items-center gap-3 rounded-md px-1 hover:bg-subtle"
+          >
+            <MarcaLogo className="size-8 shrink-0" />
+            {expandido && <Logotipo className="truncate" />}
+          </button>
         </div>
 
         <nav aria-label="Secciones" className="flex-1 p-2">
@@ -61,20 +68,6 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
                 </li>
               );
             })}
-            <li>
-              <button
-                type="button"
-                onClick={chat.alternar}
-                aria-pressed={chat.abierto}
-                title={expandido ? undefined : "Chat"}
-                className={`${BASE} ${
-                  chat.abierto ? "bg-marron-bg font-medium text-marron" : "text-fg/75 hover:bg-subtle hover:text-fg"
-                }`}
-              >
-                <MessageSquare className="size-5 shrink-0" aria-hidden="true" />
-                <span className={etiqueta}>Chat</span>
-              </button>
-            </li>
           </ul>
         </nav>
 

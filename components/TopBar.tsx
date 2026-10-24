@@ -18,16 +18,19 @@ export function TopBar() {
         <p className="hidden text-xs text-muted tabular-nums sm:block">
           Al {fechaLarga(proyecto.fecha_demo)}
         </p>
-        {!chat.abierto && (
-          <button
-            type="button"
-            onClick={chat.alternar}
-            className="inline-flex h-8 items-center gap-2 rounded-md bg-pizarra px-3 text-sm font-medium text-white hover:opacity-90"
-          >
-            <MessageSquare className="size-4" aria-hidden="true" />
-            Consultar
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={chat.alternar}
+          aria-pressed={chat.abierto}
+          className={`inline-flex h-9 items-center gap-2 rounded-md px-3.5 text-sm font-semibold transition-colors ${
+            chat.abierto
+              ? "border border-marron bg-marron-bg text-marron"
+              : "bg-marron text-white hover:opacity-90"
+          }`}
+        >
+          <MessageSquare className="size-4" strokeWidth={2.25} aria-hidden="true" />
+          Chat
+        </button>
       </div>
     </header>
   );
