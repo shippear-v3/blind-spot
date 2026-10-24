@@ -2,9 +2,9 @@ import type { EstadoHito, EstadoIndicador } from "./tipos";
 
 export const ETIQUETA_HITO: Record<EstadoHito, string> = {
   cumplido: "Cumplido",
-  cumplido_con_atraso: "Cumplido con atraso",
+  cumplido_con_atraso: "Con atraso",
   pendiente: "Pendiente",
-  vencido_sin_evidencia: "Vencido sin evidencia",
+  vencido_sin_evidencia: "Vencido",
 };
 
 export const ETIQUETA_FICHA: Record<EstadoIndicador, string> = {
@@ -13,28 +13,21 @@ export const ETIQUETA_FICHA: Record<EstadoIndicador, string> = {
   no_determinable: "No determinable",
 };
 
-export const ESTILO_HITO: Record<
-  EstadoHito,
-  { texto: string; superficie: string; marca: string }
-> = {
+export const ESTILO_HITO: Record<EstadoHito, { icono: string; badge: string }> = {
   cumplido: {
-    texto: "text-cumplido",
-    superficie: "bg-card",
-    marca: "bg-cumplido",
+    icono: "text-fg",
+    badge: "bg-subtle text-fg",
   },
   cumplido_con_atraso: {
-    texto: "text-atraso",
-    superficie: "bg-atraso/10",
-    marca: "bg-atraso",
+    icono: "text-atraso",
+    badge: "bg-atraso-bg text-atraso",
   },
   pendiente: {
-    texto: "text-pendiente",
-    superficie: "bg-card",
-    marca: "bg-pendiente",
+    icono: "text-muted",
+    badge: "border border-line text-muted",
   },
   vencido_sin_evidencia: {
-    texto: "text-vencido",
-    superficie: "bg-vencido/10",
-    marca: "bg-vencido",
+    icono: "text-vencido",
+    badge: "bg-vencido-bg text-vencido",
   },
 };

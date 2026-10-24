@@ -64,6 +64,7 @@ export type Indicador = {
   id: string;
   agente: string;
   dato: string;
+  porque: string;
   origen: string;
   estado: EstadoIndicador;
   listo: boolean;
@@ -72,6 +73,19 @@ export type Indicador = {
 export type Constructora = {
   nombre: string;
   indicadores: Indicador[];
+};
+
+export type ItemChecklist = {
+  id: string;
+  titulo: string;
+  detalle: string;
+  clave: boolean;
+};
+
+export type GrupoChecklist = {
+  id: string;
+  titulo: string;
+  items: ItemChecklist[];
 };
 
 export type Alerta =

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "terreno",
+    "titulo": "Terreno y permisos",
+    "items": [
+      {
+        "id": "dominio",
+        "titulo": "Titularidad del terreno",
+        "detalle": "Pedí el informe de dominio al Registro de la Propiedad. El terreno tiene que estar a nombre de la constructora o del fideicomiso, sin embargos ni hipotecas.",
+        "clave": true
+      },
+      {
+        "id": "permiso",
+        "titulo": "Permiso de edificación aprobado",
+        "detalle": "Confirmá en el municipio que el permiso existe y que corresponde a esta dirección.",
+        "clave": true
+      },
+      {
+        "id": "planos",
+        "titulo": "Planos municipales",
+        "detalle": "Revisá que tu unidad (metros, piso, orientación) figure igual en los planos aprobados que en el folleto.",
+        "clave": false
+      }
+    ]
+  },
+  {
+    "id": "boleto",
+    "titulo": "Boleto de compraventa",
+    "items": [
+      {
+        "id": "entrega",
+        "titulo": "Fecha de entrega y multa por demora",
+        "detalle": "El boleto tiene que fijar una fecha de posesión y una penalidad concreta por cada mes de atraso.",
+        "clave": true
+      },
+      {
+        "id": "cronograma",
+        "titulo": "Cronograma de obra anexo",
+        "detalle": "Pedí que los hitos de obra formen parte del boleto. Es lo que esta herramienta compara con las fotos.",
+        "clave": false
+      },
+      {
+        "id": "ajuste",
+        "titulo": "Cómo se ajustan las cuotas",
+        "detalle": "Entendé qué índice se usa (CAC, dólar, fijo), con qué frecuencia y si hay un tope.",
+        "clave": false
+      },
+      {
+        "id": "rescision",
+        "titulo": "Condiciones de rescisión",
+        "detalle": "Leé qué pasa si vos o la constructora quieren cortar el contrato: qué se devuelve y en qué plazo.",
+        "clave": false
+      }
+    ]
+  },
+  {
+    "id": "pagos",
+    "titulo": "Estructura y pagos",
+    "items": [
+      {
+        "id": "fideicomiso",
+        "titulo": "Fideicomiso o venta directa",
+        "detalle": "Si es un fideicomiso, pedí el contrato y quién es el fiduciario. Sabé qué rol tenés vos.",
+        "clave": false
+      },
+      {
+        "id": "garantia",
+        "titulo": "Seguro o garantía ante incumplimiento",
+        "detalle": "Preguntá si hay seguro de caución u otra garantía que te cubra si la obra se frena.",
+        "clave": false
+      },
+      {
+        "id": "escribano",
+        "titulo": "Escribano independiente",
+        "detalle": "Que la firma sea ante un escribano elegido por vos, no sólo el de la constructora.",
+        "clave": true
+      },
+      {
+        "id": "recibos",
+        "titulo": "Recibo por cada pago",
+        "detalle": "Cada pago debe tener recibo o factura a tu nombre, con referencia a la unidad.",
+        "clave": false
+      }
+    ]
+  }
+]

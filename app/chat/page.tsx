@@ -1,15 +1,5 @@
-import type { Metadata } from "next";
-import { ChatPanel } from "@/components/ChatPanel";
-import { Shell } from "@/components/Shell";
-
-export const metadata: Metadata = {
-  title: "Preguntale a tu obra",
-};
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return (
-    <Shell>
-      <ChatPanel />
-    </Shell>
-  );
+  redirect("/");
 }

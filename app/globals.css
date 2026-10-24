@@ -1,38 +1,63 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --subtle: #f4f4f5;
+  --fg: #0a0a0a;
+  --muted: #71717a;
+  --line: #e4e4e7;
+  --atraso: #b45309;
+  --atraso-bg: #fffbeb;
+  --vencido: #dc2626;
+  --vencido-bg: #fef2f2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --subtle: #1a1a1a;
+    --fg: #fafafa;
+    --muted: #a1a1aa;
+    --line: #262626;
+    --atraso: #f59e0b;
+    --atraso-bg: #f59e0b14;
+    --vencido: #f87171;
+    --vencido-bg: #f8717114;
+  }
+}
+
 @theme inline {
-  --font-sans: var(--font-body-face), sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, monospace;
-  --font-display: var(--font-display-face), sans-serif;
-  --color-soil: #1a211e;
-  --color-sodium: #e8a317;
-  --color-stamp: #f3d48a;
-  --color-galvanized: #e3e5e0;
-  --color-ink: #1c1915;
-  --color-card: #f7f6f2;
-  --color-line: #c9cbc4;
-  --color-cumplido: #1f5a45;
-  --color-atraso: #8a4b12;
-  --color-vencido: #8f2a22;
-  --color-pendiente: #3e4744;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-subtle: var(--subtle);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-atraso: var(--atraso);
+  --color-atraso-bg: var(--atraso-bg);
+  --color-vencido: var(--vencido);
+  --color-vencido-bg: var(--vencido-bg);
+}
+
+html {
+  color-scheme: light dark;
 }
 
 body {
-  background: var(--color-galvanized);
-  color: var(--color-ink);
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
 }
 
-.hazard {
-  background-image: repeating-linear-gradient(-45deg, #e8a317 0 10px, #1a211e 10px 20px);
-}
-
-.rebar {
-  background-image: repeating-linear-gradient(to bottom, #c5cac6 0 7px, #5e6662 7px 10px);
-}
-
-:focus-visible {
-  outline: 2px solid var(--color-sodium);
-  outline-offset: 3px;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
