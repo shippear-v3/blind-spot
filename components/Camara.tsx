@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Upload } from "lucide-react";
-import { proyecto } from "@/lib/datos";
+import { CalendarRange, ChevronLeft, ChevronRight, Image as ImageIcon, Upload } from "lucide-react";
+import { cronograma, proyecto } from "@/lib/datos";
+import { estadoTarea } from "@/lib/cronograma";
+import { Bloque } from "./obra/Bloque";
+import { DetalleTarea } from "./obra/DetalleTarea";
+import { Gantt } from "./obra/Gantt";
 import { ETIQUETA_ETAPA } from "@/lib/estados";
 import { fechaCorta, fechaLarga } from "@/lib/fechas";
 import { ETAPAS, type ObservacionConFoto } from "@/lib/tipos";
@@ -35,14 +39,11 @@ function Etapas({ etapa }: { etapa: ObservacionConFoto["etapa"] }) {
   );
 }
 
-function Bloque({ titulo, children }: { titulo: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-2 border-t border-line px-5 py-4">
-      <h3 className="text-xs font-medium uppercase tracking-wide text-pizarra">{titulo}</h3>
-      {children}
-    </div>
-  );
-}
+type Vista = "fotos" | "cronograma";
+
+const tareaInicial =
+  cronograma.find((t) => ["vencida", "demorada"].includes(estadoTarea(t, proyecto.fecha_demo)))?.id ??
+  cronograma[0]?.id;
 
 export function Camara({
   fotos,
@@ -60,6 +61,9 @@ export function Camara({
     fotos.findIndex((foto) => foto.fecha === fecha),
   );
   const actual = fotos[indice] ?? fotos.at(-1);
+  const [vista, setVista] = useState<Vista>("fotos");
+  const [tareaId, setTareaId] = useState(tareaInicial);
+  const tarea = cronograma.find((t) => t.id === tareaId) ?? cronograma[0];
   const [previa, setPrevia] = useState<Previa | null>(null);
   const previaRef = useRef<Previa | null>(null);
   const tira = useRef<HTMLUListElement>(null);
@@ -116,8 +120,33 @@ export function Camara({
           <h2 id="titulo-camara" className="text-xl">
             Durante la obra
           </h2>
-          <p className="text-sm text-muted">Cada foto de la cámara, con lo que avanzó.</p>
+          <p className="text-sm text-muted">
+            {vista === "fotos"
+              ? "Cada foto de la cámara, con lo que avanzó."
+              : "El plan de la constructora contra el avance real de cada tarea."}
+          </p>
         </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <div role="group" aria-label="Vista" className="inline-flex rounded-md border border-line bg-subtle p-0.5">
+            {(
+              [
+                { id: "fotos", etiqueta: "Fotos", Icono: ImageIcon },
+                { id: "cronograma", etiqueta: "Cronograma", Icono: CalendarRange },
+              ] as const
+            ).map(({ id, etiqueta, Icono }) => (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={vista === id}
+                onClick={() => setVista(id)}
+                className="inline-flex h-7 items-center gap-1.5 rounded px-2.5 text-sm font-medium text-muted hover:text-fg aria-pressed:bg-surface aria-pressed:text-fg aria-pressed:shadow-sm"
+              >
+                <Icono className="size-4" strokeWidth={2.25} aria-hidden="true" />
+                {etiqueta}
+              </button>
+            ))}
+          </div>
+          {vista === "fotos" && (
         <label className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-md border border-line bg-surface px-3 text-sm font-medium hover:bg-subtle focus-within:outline-2 focus-within:outline-pizarra">
           <input
             type="file"
@@ -131,8 +160,27 @@ export function Camara({
           <Upload className="size-4" aria-hidden="true" />
           Subir foto
         </label>
+          )}
+        </div>
       </div>
 
+      {vista === "cronograma" && tarea ? (
+        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <Gantt tareas={cronograma} hoy={proyecto.fecha_demo} seleccion={tarea.id} onElegir={setTareaId} />
+          <DetalleTarea
+            tareas={cronograma}
+            tarea={tarea}
+            hoy={proyecto.fecha_demo}
+            fotos={fotos}
+            onElegir={setTareaId}
+            onVerFoto={(f) => {
+              guardarPrevia(null);
+              onElegirFecha(f);
+              setVista("fotos");
+            }}
+          />
+        </div>
+      ) : (
       <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="flex min-w-0 flex-col gap-3">
           <figure className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-black">
@@ -285,6 +333,7 @@ export function Camara({
           )}
         </aside>
       </div>
+      )}
     </section>
   );
 }

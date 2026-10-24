@@ -1,0 +1,86 @@
+[
+  {
+    "id": "obrador",
+    "nombre": "Limpieza y obrador",
+    "inicio": "2026-03-02",
+    "fin": "2026-03-20",
+    "avance": 100,
+    "responsable": "Cuadrilla propia",
+    "personas": 4
+  },
+  {
+    "id": "excavacion",
+    "nombre": "Excavación",
+    "inicio": "2026-03-23",
+    "fin": "2026-04-17",
+    "avance": 100,
+    "responsable": "Movimiento de suelos (subcontrato)",
+    "personas": 3
+  },
+  {
+    "id": "fundaciones",
+    "nombre": "Fundaciones",
+    "inicio": "2026-04-13",
+    "fin": "2026-05-29",
+    "avance": 100,
+    "responsable": "Cuadrilla propia",
+    "personas": 8
+  },
+  {
+    "id": "estructura",
+    "nombre": "Estructura de hormigón",
+    "inicio": "2026-06-01",
+    "fin": "2026-11-27",
+    "avance": 68,
+    "responsable": "Cuadrilla propia",
+    "personas": 10,
+    "nota": "Losa del 5° piso en curso. El plan preveía tener el 6° piso hormigonado a fin de octubre."
+  },
+  {
+    "id": "mamposteria",
+    "nombre": "Mampostería de elevación",
+    "inicio": "2026-09-14",
+    "fin": "2026-12-18",
+    "avance": 0,
+    "responsable": "Albañilería (subcontrato)",
+    "personas": 6,
+    "nota": "Debía empezar el 14 de septiembre. No hay evidencia en las fotos ni en los partes de obra."
+  },
+  {
+    "id": "sanitarias",
+    "nombre": "Instalaciones sanitarias",
+    "inicio": "2026-10-05",
+    "fin": "2027-01-29",
+    "avance": 12,
+    "responsable": "Sanitarista matriculado",
+    "personas": 2,
+    "nota": "Montantes en subsuelo, según parte de obra del 15 de octubre."
+  },
+  {
+    "id": "electrica",
+    "nombre": "Instalación eléctrica",
+    "inicio": "2026-11-02",
+    "fin": "2027-02-26",
+    "avance": 0,
+    "responsable": "Electricista matriculado",
+    "personas": 2
+  },
+  {
+    "id": "contrapisos",
+    "nombre": "Contrapisos",
+    "inicio": "2027-01-04",
+    "fin": "2027-02-12",
+    "avance": 0,
+    "responsable": "Cuadrilla propia",
+    "personas": 4
+  },
+  {
+    "id": "revoques",
+    "nombre": "Revoques",
+    "inicio": "2027-02-01",
+    "fin": "2027-03-26",
+    "avance": 0,
+    "responsable": "Albañilería (subcontrato)",
+    "personas": 5
+  }
+]

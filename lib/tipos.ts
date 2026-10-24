@@ -115,6 +115,19 @@ export type ArchivoCargado = {
   itemId: string | null;
 };
 
+export type Tarea = {
+  id: string;
+  nombre: string;
+  inicio: string;
+  fin: string;
+  avance: number;
+  responsable: string;
+  personas: number;
+  nota?: string;
+};
+
+export type EstadoTarea = "terminada" | "en_curso" | "demorada" | "vencida" | "pendiente";
+
 export type Alerta =
   | { tipo: "vencido"; nombre: string; fecha: string }
   | { tipo: "silencio"; dias: number; fecha: string }
