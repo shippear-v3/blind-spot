@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-body-face), sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+  --font-display: var(--font-display-face), sans-serif;
+  --color-soil: #1a211e;
+  --color-sodium: #e8a317;
+  --color-stamp: #f3d48a;
+  --color-galvanized: #e3e5e0;
+  --color-ink: #1c1915;
+  --color-card: #f7f6f2;
+  --color-line: #c9cbc4;
+  --color-cumplido: #1f5a45;
+  --color-atraso: #8a4b12;
+  --color-vencido: #8f2a22;
+  --color-pendiente: #3e4744;
+}
+
+body {
+  background: var(--color-galvanized);
+  color: var(--color-ink);
+}
+
+.hazard {
+  background-image: repeating-linear-gradient(-45deg, #e8a317 0 10px, #1a211e 10px 20px);
+}
+
+.rebar {
+  background-image: repeating-linear-gradient(to bottom, #c5cac6 0 7px, #5e6662 7px 10px);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-sodium);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

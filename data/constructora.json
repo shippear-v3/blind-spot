@@ -1,0 +1,61 @@
+{
+  "nombre": "Constructora Demo S.A. (ficticia)",
+  "indicadores": [
+    {
+      "id": "obras",
+      "agente": "Historial de obras",
+      "dato": "Obras entregadas: 8 de 10",
+      "origen": "declarado por la empresa",
+      "estado": "sin_alertas",
+      "listo": true
+    },
+    {
+      "id": "plazos",
+      "agente": "Plazos de entrega",
+      "dato": "Demora promedio: 5 meses sobre lo prometido",
+      "origen": "reportado por compradores",
+      "estado": "alerta",
+      "listo": true
+    },
+    {
+      "id": "bcra",
+      "agente": "Situación crediticia",
+      "dato": "Situación crediticia BCRA: 1 (normal)",
+      "origen": "fuente pública (BCRA)",
+      "estado": "sin_alertas",
+      "listo": true
+    },
+    {
+      "id": "portales",
+      "agente": "Unidades en portales",
+      "dato": "Unidades en venta con la misma dirección",
+      "origen": "próximamente",
+      "estado": "no_determinable",
+      "listo": false
+    },
+    {
+      "id": "normativa",
+      "agente": "Conflictos con normativa",
+      "dato": "Cruces con expedientes municipales",
+      "origen": "próximamente",
+      "estado": "no_determinable",
+      "listo": false
+    },
+    {
+      "id": "redes",
+      "agente": "Redes y registros",
+      "dato": "Publicaciones y registros de la constructora",
+      "origen": "próximamente",
+      "estado": "no_determinable",
+      "listo": false
+    },
+    {
+      "id": "zonas",
+      "agente": "Zona de construcción",
+      "dato": "Obras activas en la misma zona",
+      "origen": "próximamente",
+      "estado": "no_determinable",
+      "listo": false
+    }
+  ]
+}

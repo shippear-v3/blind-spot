@@ -1,0 +1,98 @@
+[
+  {
+    "fecha": "2026-03-10",
+    "foto": "/obra/2026-03-10.jpg",
+    "etapa": "terreno",
+    "pisos_con_estructura_visibles": null,
+    "elementos_visibles": ["cerco de obra", "tierra suelta", "vereda"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "primera foto",
+    "descripcion": "Lote vacío. Se ve el cerco y la tierra, sin excavación ni estructura.",
+    "confianza": "alta",
+    "limitaciones": ""
+  },
+  {
+    "fecha": "2026-04-02",
+    "foto": "/obra/2026-04-02.jpg",
+    "etapa": "excavacion_y_fundaciones",
+    "pisos_con_estructura_visibles": null,
+    "elementos_visibles": ["pozo de excavación", "tierra acumulada", "grúa"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "Apareció el pozo y una grúa. El lote ya no está vacío.",
+    "descripcion": "El pozo está abierto. Todavía no se ve hormigón ni columnas.",
+    "confianza": "alta",
+    "limitaciones": "El fondo del pozo queda en sombra."
+  },
+  {
+    "fecha": "2026-04-22",
+    "foto": "/obra/2026-04-22.jpg",
+    "etapa": "excavacion_y_fundaciones",
+    "pisos_con_estructura_visibles": null,
+    "elementos_visibles": ["hormigón de fundación", "pozo", "grúa"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "En el fondo del pozo se ve hormigón. Sigue sin haber estructura en altura.",
+    "descripcion": "Hay hormigón de fundación en el fondo. La estructura todavía no arranca.",
+    "confianza": "alta",
+    "limitaciones": ""
+  },
+  {
+    "fecha": "2026-06-08",
+    "foto": "/obra/2026-06-08.jpg",
+    "etapa": "estructura",
+    "pisos_con_estructura_visibles": 1,
+    "elementos_visibles": ["losas", "columnas", "grúa"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "El pozo desapareció. Se ve una losa completa sobre columnas.",
+    "descripcion": "Una losa de estructura, completa, sobre columnas.",
+    "confianza": "alta",
+    "limitaciones": ""
+  },
+  {
+    "fecha": "2026-07-15",
+    "foto": "/obra/2026-07-15.jpg",
+    "etapa": "estructura",
+    "pisos_con_estructura_visibles": 2,
+    "elementos_visibles": ["losas", "columnas"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "Se sumó una segunda losa.",
+    "descripcion": "Dos losas de estructura. La de arriba se ve un poco de costado.",
+    "confianza": "media",
+    "limitaciones": "El ángulo no deja ver el fondo del lote."
+  },
+  {
+    "fecha": "2026-08-12",
+    "foto": "/obra/2026-08-12.jpg",
+    "etapa": "estructura",
+    "pisos_con_estructura_visibles": 3,
+    "elementos_visibles": ["losas", "columnas", "hierros de espera"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "Apareció la tercera losa.",
+    "descripcion": "Tres losas completas. La estructura llega al tercer piso.",
+    "confianza": "alta",
+    "limitaciones": ""
+  },
+  {
+    "fecha": "2026-09-20",
+    "foto": "/obra/2026-09-20.jpg",
+    "etapa": "estructura",
+    "pisos_con_estructura_visibles": 4,
+    "elementos_visibles": ["losas", "columnas", "mixer"],
+    "hay_actividad_visible": true,
+    "cambios_vs_foto_anterior": "Se sumó una cuarta losa. Hay un mixer en la vereda.",
+    "descripcion": "Cuatro losas. No hay mampostería.",
+    "confianza": "alta",
+    "limitaciones": ""
+  },
+  {
+    "fecha": "2026-10-18",
+    "foto": "/obra/2026-10-18.jpg",
+    "etapa": "estructura",
+    "pisos_con_estructura_visibles": 4,
+    "elementos_visibles": ["losas", "columnas"],
+    "hay_actividad_visible": false,
+    "cambios_vs_foto_anterior": "No se ve un piso nuevo. El mixer ya no está.",
+    "descripcion": "Sigue en cuatro losas. No se ve actividad ni un piso más.",
+    "confianza": "alta",
+    "limitaciones": ""
+  }
+]
