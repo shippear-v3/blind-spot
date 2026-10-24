@@ -24,7 +24,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Cómo viene mi obra",
-    template: "%s · Torre Ejemplo",
+    template: "%s · Edificio Ejemplo",
   },
   description: "Seguimiento de una inversión en pozo. Los datos de esta demo son ficticios.",
 };

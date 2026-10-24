@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { SiteHeader } from "./SiteHeader";
 
@@ -9,7 +10,10 @@ export function Shell({ children }: { children: ReactNode }) {
         {children}
       </main>
       <footer className="border-t border-line px-4 py-4 text-center font-mono text-xs text-pendiente">
-        Obra, constructora y esquemas ficticios. No es asesoramiento legal ni financiero.
+        Obra, constructora y fotos de demo son ficticios. No es asesoramiento legal ni financiero.{" "}
+        <Link href="/cargar" className="underline">
+          Cargar foto
+        </Link>
       </footer>
     </>
   );

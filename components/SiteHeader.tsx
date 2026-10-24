@@ -20,7 +20,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono text-xs tracking-[0.18em] text-stamp">
-            INVERSIÓN EN POZO · MAQUETA
+            {pathname.startsWith("/cargar") ? "CARGA DE OBRA" : "INVERSIÓN EN POZO"}
           </p>
           <Link href="/" className="mt-1 inline-block">
             <h1 className="font-display text-5xl font-extrabold uppercase leading-none tracking-tight sm:text-6xl">

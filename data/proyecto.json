@@ -1,8 +1,8 @@
 {
-  "obra": "Torre Ejemplo",
+  "obra": "Edificio Ejemplo",
   "direccion": "Calle Ficticia 1234, Rosario",
   "constructora": "Constructora Demo S.A. (ficticia)",
-  "unidad": "Depto 4B, 2 ambientes",
-  "entrega_prometida": "2027-12-15",
-  "fecha_demo": "2026-10-24"
+  "unidad": "Depto 3B, 2 ambientes",
+  "entrega_prometida": "2027-03-31",
+  "fecha_demo": "2026-11-10"
 }

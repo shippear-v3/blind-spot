@@ -2,43 +2,51 @@
   {
     "id": "permiso",
     "nombre": "Permiso de edificación aprobado",
-    "fecha_prometida": "2026-02-28",
+    "fecha_prometida": "2026-01-31",
     "tipo": "documento",
     "evidencia_documental": {
-      "fecha": "2026-02-20",
+      "fecha": "2026-01-05",
       "fuente": "Permiso N° 0000 (ficticio)"
     }
   },
   {
     "id": "fundaciones",
     "nombre": "Excavación y fundaciones",
-    "fecha_prometida": "2026-04-30",
+    "fecha_prometida": "2026-03-31",
     "tipo": "foto",
     "etapa_minima": "excavacion_y_fundaciones",
     "pisos_minimos": null
   },
   {
+    "id": "estructura_p1",
+    "nombre": "Estructura hasta piso 1",
+    "fecha_prometida": "2026-05-15",
+    "tipo": "foto",
+    "etapa_minima": "estructura",
+    "pisos_minimos": 1
+  },
+  {
+    "id": "estructura_p2",
+    "nombre": "Estructura hasta piso 2",
+    "fecha_prometida": "2026-07-15",
+    "tipo": "foto",
+    "etapa_minima": "estructura",
+    "pisos_minimos": 2
+  },
+  {
     "id": "estructura_p3",
     "nombre": "Estructura hasta piso 3",
-    "fecha_prometida": "2026-07-31",
+    "fecha_prometida": "2026-09-30",
     "tipo": "foto",
     "etapa_minima": "estructura",
     "pisos_minimos": 3
   },
   {
-    "id": "estructura_p6",
-    "nombre": "Estructura hasta piso 6",
-    "fecha_prometida": "2026-10-15",
+    "id": "terminaciones",
+    "nombre": "Terminaciones de fachada",
+    "fecha_prometida": "2026-12-15",
     "tipo": "foto",
-    "etapa_minima": "estructura",
-    "pisos_minimos": 6
-  },
-  {
-    "id": "mamposteria",
-    "nombre": "Mampostería",
-    "fecha_prometida": "2027-03-31",
-    "tipo": "foto",
-    "etapa_minima": "mamposteria",
+    "etapa_minima": "terminaciones",
     "pisos_minimos": null
   }
 ]

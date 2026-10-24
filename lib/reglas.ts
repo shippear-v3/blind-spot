@@ -1,4 +1,4 @@
-import { hitos, observaciones, proyecto } from "./datos";
+import { hitos, proyecto } from "./datos";
 import { diasEntre } from "./fechas";
 import { ETAPAS, type Alerta, type Hito, type HitoConEstado, type ObservacionConFoto } from "./tipos";
 
@@ -14,8 +14,8 @@ function venceOPendiente(hito: Hito): Pick<HitoConEstado, "estado"> {
     : { estado: "pendiente" };
 }
 
-export function fotosOrdenadas(extra: ObservacionConFoto[] = []) {
-  return [...observaciones, ...extra].sort((a, b) => a.fecha.localeCompare(b.fecha));
+export function fotosOrdenadas(fotos: ObservacionConFoto[]) {
+  return [...fotos].sort((a, b) => a.fecha.localeCompare(b.fecha));
 }
 
 function estadoHito(hito: Hito, fotos: ObservacionConFoto[]): Omit<HitoConEstado, keyof Hito> {
@@ -49,9 +49,8 @@ function estadoHito(hito: Hito, fotos: ObservacionConFoto[]): Omit<HitoConEstado
   };
 }
 
-export function cronograma(extra: ObservacionConFoto[] = []): HitoConEstado[] {
-  const fotos = fotosOrdenadas(extra);
-  return hitos.map((hito) => ({ ...hito, ...estadoHito(hito, fotos) }));
+export function cronograma(fotos: ObservacionConFoto[]): HitoConEstado[] {
+  return hitos.map((hito) => ({ ...hito, ...estadoHito(hito, fotosOrdenadas(fotos)) }));
 }
 
 export function alertasDe(items: HitoConEstado[], fotos: ObservacionConFoto[]): Alerta[] {
