@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Arimo, Inter } from "next/font/google";
 import { Shell } from "@/components/Shell";
 import "./globals.css";
 
@@ -9,24 +9,30 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const arimo = Arimo({
+  subsets: ["latin", "latin-ext"],
+  weight: ["700"],
+  variable: "--font-arimo",
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Cómo viene mi obra",
-    template: "%s · Torre Ejemplo",
+    default: "Blind Spot · Cómo viene mi obra",
+    template: "%s · Blind Spot",
   },
   description: "Seguimiento de una inversión en pozo. Los datos de esta demo son ficticios.",
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0c0c" },
   ],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es" className={`${inter.variable} h-full antialiased`}>
+    <html lang="es" className={`${inter.variable} ${arimo.variable} h-full antialiased`}>
       <body className="min-h-full bg-bg font-sans text-fg">
         <a
           href="#contenido"

@@ -67,7 +67,7 @@ export function Inversion() {
                 key={h.id}
                 className={`h-1 flex-1 rounded-full ${
                   h.estado === "cumplido"
-                    ? "bg-fg"
+                    ? "bg-pizarra"
                     : h.estado === "cumplido_con_atraso"
                       ? "bg-atraso"
                       : h.estado === "vencido_sin_evidencia"
@@ -99,10 +99,8 @@ export function Inversion() {
 
       <Alertas items={avisos} />
 
-      <div className="grid min-w-0 items-start gap-8 xl:grid-cols-[minmax(0,1.35fr)_minmax(20rem,1fr)]">
-        <Camara fotos={fotos} fecha={vista.fecha} seleccion={vista.n} onElegirFecha={verFoto} />
-        <LineaDeTiempo hitos={hitos} fechaVisible={vista.fecha} onVerFoto={verFoto} />
-      </div>
+      <Camara fotos={fotos} fecha={vista.fecha} seleccion={vista.n} onElegirFecha={verFoto} />
+      <LineaDeTiempo hitos={hitos} fechaVisible={vista.fecha} onVerFoto={verFoto} />
     </div>
   );
 }

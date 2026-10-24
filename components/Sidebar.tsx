@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Building2, ListChecks, MessageSquare, PanelLeftClose, PanelLeftOpen, ScanEye } from "lucide-react";
+import { Building2, ListChecks, MessageSquare, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { MarcaLogo, Logotipo } from "./Logo";
 import { useChat } from "./Shell";
 
 const LINKS: { href: string; label: string; icono: LucideIcon }[] = [
@@ -34,10 +35,8 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
         }`}
       >
         <div className="flex h-14 shrink-0 items-center gap-3 border-b border-line px-3">
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-fg text-bg">
-            <ScanEye className="size-4" aria-hidden="true" />
-          </span>
-          <span className={`text-sm font-semibold tracking-tight ${etiqueta}`}>Blindspot</span>
+          <MarcaLogo className="size-8 shrink-0" />
+          {expandido ? <Logotipo className="truncate" /> : <span className="sr-only">Blind Spot</span>}
         </div>
 
         <nav aria-label="Secciones" className="flex-1 p-2">
@@ -51,7 +50,9 @@ export function Sidebar({ expandido, onAlternar }: { expandido: boolean; onAlter
                     title={expandido ? undefined : label}
                     aria-current={activo ? "page" : undefined}
                     className={`${BASE} ${
-                      activo ? "bg-subtle font-medium text-fg" : "text-muted hover:bg-subtle hover:text-fg"
+                      activo
+                        ? "bg-marron-bg font-medium text-fg shadow-[inset_2px_0_0_var(--marron)]"
+                        : "text-muted hover:bg-subtle hover:text-fg"
                     }`}
                   >
                     <Icono className="size-[18px] shrink-0" aria-hidden="true" />

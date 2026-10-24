@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #fafafa;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --subtle: #f4f4f5;
-  --fg: #0a0a0a;
-  --muted: #71717a;
-  --line: #e4e4e7;
+  --subtle: #f6f5f4;
+  --fg: #111111;
+  --muted: #6e6967;
+  --line: #e6e3e1;
+  --marron: #8c7c75;
+  --marron-bg: #8c7c7514;
+  --pizarra: #5b6570;
+  --pizarra-bg: #5b657012;
   --atraso: #b45309;
   --atraso-bg: #fffbeb;
   --vencido: #dc2626;
@@ -15,12 +19,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --subtle: #1a1a1a;
-    --fg: #fafafa;
-    --muted: #a1a1aa;
-    --line: #262626;
+    --bg: #0c0c0c;
+    --surface: #131313;
+    --subtle: #1b1a1a;
+    --fg: #f5f5f4;
+    --muted: #a8a29f;
+    --line: #2a2827;
+    --marron: #a8978f;
+    --marron-bg: #a8978f1a;
+    --pizarra: #8d98a4;
+    --pizarra-bg: #8d98a41a;
     --atraso: #f59e0b;
     --atraso-bg: #f59e0b14;
     --vencido: #f87171;
@@ -30,12 +38,17 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-arimo), Arial, Helvetica, sans-serif;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
   --color-subtle: var(--subtle);
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-line: var(--line);
+  --color-marron: var(--marron);
+  --color-marron-bg: var(--marron-bg);
+  --color-pizarra: var(--pizarra);
+  --color-pizarra-bg: var(--pizarra-bg);
   --color-atraso: var(--atraso);
   --color-atraso-bg: var(--atraso-bg);
   --color-vencido: var(--vencido);
@@ -54,8 +67,15 @@ body {
 }
 
 @layer base {
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
   :focus-visible {
-    outline: 2px solid var(--fg);
+    outline: 2px solid var(--pizarra);
     outline-offset: 2px;
   }
 }

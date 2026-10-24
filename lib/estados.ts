@@ -1,4 +1,13 @@
-import type { EstadoHito, EstadoIndicador } from "./tipos";
+import type { Etapa, EstadoHito, EstadoIndicador } from "./tipos";
+
+export const ETIQUETA_ETAPA: Record<Etapa, string> = {
+  terreno: "Terreno",
+  excavacion_y_fundaciones: "Excavación y fundaciones",
+  estructura: "Estructura",
+  mamposteria: "Mampostería",
+  instalaciones: "Instalaciones",
+  terminaciones: "Terminaciones",
+};
 
 export const ETIQUETA_HITO: Record<EstadoHito, string> = {
   cumplido: "Cumplido",

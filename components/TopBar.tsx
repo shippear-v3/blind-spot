@@ -22,7 +22,7 @@ export function TopBar() {
           <button
             type="button"
             onClick={chat.alternar}
-            className="inline-flex h-8 items-center gap-2 rounded-md border border-line bg-surface px-3 text-sm font-medium hover:bg-subtle"
+            className="inline-flex h-8 items-center gap-2 rounded-md bg-pizarra px-3 text-sm font-medium text-white hover:opacity-90"
           >
             <MessageSquare className="size-4" aria-hidden="true" />
             Consultar
